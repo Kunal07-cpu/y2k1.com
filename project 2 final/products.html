@@ -1,148 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
+    <title>All Products - y2k.com</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+    <script src="product-helpers.js"></script>
 </head>
+
 <body>
     <div class="header">
         <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <h1>y2k.com</h1>
+            <div class="navbar">
+                <div class="logo">
+                    <h1>y2k.com</h1>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html"><b>Products</b></a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img class="cart" src="wishlist-removebg-preview.png" width="30px"
+                            height="30px"></a>
+                    <span class="cart-badge">0</span>
+                </div>
+                <div class="wishlist-container">
+                    <a href="wishlist.html"><i class="fa fa-heart"
+                            style="font-size: 24px; color: #ff523b; margin-left: 20px;"></i></a>
+                    <span class="wishlist-badge">0</span>
+                </div>
+                <img class="menu-icon" src="menu_icon-removebg-preview.png" onclick="menutoggle()">
             </div>
-            <nav>
-                <ul id="MenuItems">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="account.html">Account</b></a></li>
-                </ul>
-            </nav>
-            <a href >
-            <img class="cart" src="wishlist-removebg-preview.png" width="30px" height="30px">
-            <img class="menu-icon" src="menu_icon-removebg-preview.png"
-            onclick="menutoggle()"></a>
-        </div>
-      
-        </div>
-        </div>
-    
-    
-            <h2 class="heading">All Products </h2>
-        <div class="row">
-            <div class="col-4">
-                <a href="products-details.html">
-               <img  src="photo 31.jpg" >
-               <h4> Design Shirt</h4>
-               <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-               </div>
-               <p>₹ 499</p>
-               </a>
-            </div>
-            <div class="col-4">
-                <a href="cart4.html">
-                <img src="photo 16.jpeg" >
-                <h4>Blue Shirt</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 199</p>
-                </a>
-             </div>
-             <div class="col-4">
-                <a href="cart5.html">
-                <img src="photo 15.jpg" >
-                <h4>Printed Shirt</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 299</p>
-                </a>
-             </div>
-             <div class="col-4">
-                <a href="cart6.html">
-                <img src="photo 14.jpg" >
-                <h4> White Shirt</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 399</p>
-                </a>
-             </div>
-             <div class="col-4">
-                <a href="cart7.html">
-                <img class="t-shirt" src="photo 19.webp" >
-                <h4> Blue Shoes</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 1999</p>
-                </a>
-             </div>
-             <div class="col-4">
-                <a href="cart8.html">
-                <img class="t-shirt" src="photo20.jpeg" >
-                <h4> Yellow Shoes</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 1999 </p>
-                </a>
-             </div>
-             <div class="col-4">
-                <a href="cart9.html">
-                <img class="t-shirt" src="photo 21.jpeg" >
-                <h4> Dark blue T-Shirt</h4>
-                <div class="rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-o"></i>
-                </div>
-                <p>₹ 200.00</p>
-                </a>
-             </div>
-             
         </div>
     </div>
-    </div>
-    </div>
-    </div>
-    
 
+    <div class="small-container">
+        <h2 class="heading">All Products</h2>
+        <div class="row" id="products-container">
+            <!-- Products will be dynamically rendered here -->
+        </div>
+    </div>
+
+    <script>
+        // Menu toggle function
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        // Render all products
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+
+            let html = '';
+            products.forEach(product => {
+                const isWishlisted = isInWishlist(product.id);
+                const heartIcon = isWishlisted ? 'fa-heart' : 'fa-heart-o';
+                const wishlistClass = isWishlisted ? 'active' : '';
+
+                html += `
+                    <div class="col-4" data-product-id="${product.id}">
+                        <a href="product-details.html?id=${product.id}">
+                            <img src="${product.image}" alt="${product.name}">
+                            <h4>${product.name}</h4>
+                            <div class="rating">
+                                ${generateStarRating(product.rating)}
+                            </div>
+                            <p>${formatPrice(product.price)}</p>
+                        </a>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${product.id});">
+                                Add to Cart
+                            </button>
+                            <button class="wishlist-btn ${wishlistClass}" onclick="event.stopPropagation(); toggleWishlist(${product.id}, this);">
+                                <i class="fa ${heartIcon}"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            renderProducts();
+        });
+    </script>
 </body>
+
 </html>

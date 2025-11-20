@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - y2k.com</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <h1>y2k.com</h1>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img class="cart" src="wishlist-removebg-preview.png" width="30px"
+                            height="30px"></a>
+                    <span class="cart-badge">0</span>
+                </div>
+                <div class="wishlist-container">
+                    <a href="wishlist.html"><i class="fa fa-heart"
+                            style="font-size: 24px; color: #ff523b; margin-left: 20px;"></i></a>
+                    <span class="wishlist-badge">0</span>
+                </div>
+                <img class="menu-icon" src="menu_icon-removebg-preview.png" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <div class="large-container single-product">
+        <div id="product-details-container">
+            <!-- Product details will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                    <h3>Download our App</h3>
+                    <p>Download App for Android and ios mobile phone.</p>
+                    <div class="applogo">
+                        <img src="google_play-removebg-preview (1).png">
+                        <img src="apple.jpg">
+                    </div>
+                </div>
+                <div class="footer-col2">
+                    <h1>y2k.com</h1>
+                    <p>Our Purpose is to Sustainably make the Pleasure and Benifits of Fashion Accessible to many.</p>
+                </div>
+                <div class="footer-col3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright">
+                <p>Copyright 2023 - Easy Tutorials</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu toggle function
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        // Get product ID from URL
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('id'));
+        }
+
+        // Selected size
+        let selectedSize = null;
+
+        // Select size
+        function selectSize(size, element) {
+            selectedSize = size;
+            // Update UI
+            document.querySelectorAll('.size-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        // Add to cart with size
+        function addProductToCart(productId) {
+            const product = getProductById(productId);
+
+            if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+                showNotification('Please select a size', 'error');
+                return;
+            }
+
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            addToCart(productId, selectedSize, quantity);
+        }
+
+        // Render product details
+        function renderProductDetails() {
+            const productId = getProductIdFromURL();
+            const product = getProductById(productId);
+
+            if (!product) {
+                document.getElementById('product-details-container').innerHTML = `
+                    <div class="empty-state">
+                        <h2>Product not found</h2>
+                        <p>The product you're looking for doesn't exist.</p>
+                        <a href="products.html" class="btn">Browse Products</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Build size selector HTML
+            let sizeHTML = '';
+            if (product.sizes && product.sizes.length > 0) {
+                sizeHTML = `
+                    <div class="size-selector">
+                        <label>Select Size:</label>
+                        <div class="size-options">
+                            ${product.sizes.map(size => `
+                                <div class="size-option" onclick="selectSize('${size}', this)">${size}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Build image gallery HTML
+            let imageGalleryHTML = '';
+            if (product.images && product.images.length > 1) {
+                imageGalleryHTML = `
+                    <div class="small-img-row">
+                        ${product.images.map(img => `
+                            <div class="small-img-col">
+                                <img id="shirt-img" src="${img}" alt="" width="100%" class="small-img" 
+                                    onclick="document.getElementById('ProductImg').src='${img}'">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            const html = `
+                <div class="row">
+                    <img src="${product.images ? product.images[0] : product.image}" alt="${product.name}" id="ProductImg">
+                    <div class="col-3">
+                        <p>Home \\ ${product.category}</p>
+                        <h1>${product.name}</h1>
+                        <h4>${formatPrice(product.price)}</h4>
+                        
+                        ${sizeHTML}
+                        
+                        <div class="quantity-selector">
+                            <label>Quantity:</label>
+                            <button class="quantity-btn" onclick="decrementQuantity()">-</button>
+                            <input type="number" id="quantity" class="quantity-input" value="1" min="1">
+                            <button class="quantity-btn" onclick="incrementQuantity()">+</button>
+                        </div>
+                        
+                        <a href="#" class="btn" onclick="addProductToCart(${product.id}); return false;">Add to cart</a>
+                        
+                        <h3>Product details</h3>
+                        <p>${product.description}</p>
+                        
+                        ${product.details ? `
+                            <div style="margin-top: 20px;">
+                                ${Object.entries(product.details).map(([key, value]) => `
+                                    <p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${value}</p>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${imageGalleryHTML}
+                </div>
+            `;
+
+            document.getElementById('product-details-container').innerHTML = html;
+        }
+
+        // Quantity controls
+        function incrementQuantity() {
+            const input = document.getElementById('quantity');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decrementQuantity() {
+            const input = document.getElementById('quantity');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            renderProductDetails();
+        });
+    </script>
+</body>
+
+</html>

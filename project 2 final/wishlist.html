@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - y2k.com</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <h1>y2k.com</h1>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img class="cart" src="wishlist-removebg-preview.png" width="30px"
+                            height="30px"></a>
+                    <span class="cart-badge">0</span>
+                </div>
+                <div class="wishlist-container">
+                    <a href="wishlist.html"><i class="fa fa-heart"
+                            style="font-size: 24px; color: #ff523b; margin-left: 20px;"></i></a>
+                    <span class="wishlist-badge">0</span>
+                </div>
+                <img class="menu-icon" src="menu_icon-removebg-preview.png" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <!--wishlist items-->
+    <div class="small-container cart-page">
+        <h2 class="heading">My Wishlist</h2>
+
+        <div id="wishlist-container">
+            <!-- Wishlist items will be dynamically inserted here -->
+        </div>
+
+        <div id="empty-wishlist" class="empty-state" style="display: none;">
+            <i class="fa fa-heart-o"></i>
+            <h2>Your wishlist is empty</h2>
+            <p>Save your favorite items here!</p>
+            <a href="products.html" class="btn">Browse Products</a>
+        </div>
+    </div>
+
+    <script>
+        // Menu toggle function
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+        // Render wishlist
+        function renderWishlist() {
+            const wishlist = getWishlist();
+            const wishlistContainer = document.getElementById('wishlist-container');
+            const emptyWishlist = document.getElementById('empty-wishlist');
+
+            if (wishlist.length === 0) {
+                wishlistContainer.innerHTML = '';
+                emptyWishlist.style.display = 'block';
+                return;
+            }
+
+            emptyWishlist.style.display = 'none';
+
+            let html = '<div style="margin-top: 30px;">';
+
+            wishlist.forEach(item => {
+                html += `
+                    <div class="wishlist-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="wishlist-item-info">
+                            <h4>${item.name}</h4>
+                            <p>${formatPrice(item.price)}</p>
+                        </div>
+                        <div class="wishlist-item-actions">
+                            <button class="move-to-cart" onclick="moveItemToCart(${item.id})">
+                                <i class="fa fa-shopping-cart"></i> Move to Cart
+                            </button>
+                            <button class="remove-wishlist" onclick="removeItemFromWishlist(${item.id})">
+                                <i class="fa fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            wishlistContainer.innerHTML = html;
+        }
+
+        // Move item to cart
+        function moveItemToCart(productId) {
+            moveToCart(productId);
+            renderWishlist();
+        }
+
+        // Remove item from wishlist
+        function removeItemFromWishlist(productId) {
+            removeFromWishlist(productId);
+            renderWishlist();
+            showNotification('Item removed from wishlist');
+        }
+
+        // Initialize wishlist on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            renderWishlist();
+        });
+    </script>
+</body>
+
+</html>
